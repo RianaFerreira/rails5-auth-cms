@@ -46,6 +46,7 @@ group :development, :test do
   gem "dotenv-rails"
   # testing framework
   gem "rspec-rails", "~> 3.5"
+
 end
 
 group :development do
@@ -56,7 +57,9 @@ group :development do
   gem "spring"
   gem "spring-watcher-listen", "~> 2.0.0"
   # automatically run specs related to channged code when file is saved
-  # gem "guard"
+  gem "guard-rspec"
+  # show test suite progress
+  gem "fuubar"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
