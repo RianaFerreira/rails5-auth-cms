@@ -43,7 +43,7 @@ group :development, :test do
   # stop code execution and open a debugger console
   gem "byebug", platform: :mri
   # configure environment variables
-  gem "dotenv-rails"
+  gem "dotenv-rails", "~> 2.2"
   # testing framework
   gem "rspec-rails", "~> 3.5"
 
@@ -57,9 +57,13 @@ group :development do
   gem "spring"
   gem "spring-watcher-listen", "~> 2.0.0"
   # automatically run specs related to channged code when file is saved
-  gem "guard-rspec"
+  gem "guard-rspec", "~> 4.7"
   # show test suite progress
-  gem "fuubar"
+  gem "fuubar", "~> 2.2"
+end
+
+group :test do
+  gem "shoulda-matchers", "~> 3.1"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
