@@ -52,6 +52,8 @@ group :development, :test do
   gem "database_cleaner", "~> 1.5"
   # testing framework
   gem "rspec-rails", "~> 3.5"
+  # fixture replacement
+  gem "factory_girl_rails", "~> 4.8"
 end
 
 group :development do
