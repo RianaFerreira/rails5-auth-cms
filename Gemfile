@@ -32,6 +32,9 @@ gem "jbuilder", "~> 2.5"
 # Use ActiveModel has_secure_password
 # gem "bcrypt", "~> 3.1.7"
 
+# Content Management System for app
+gem "comfortable_mexican_sofa", "~> 1.12.0"
+
 # Admin and User authentication
 gem "devise"
 # Role management for users and admins
@@ -44,6 +47,8 @@ group :development, :test do
   gem "byebug", platform: :mri
   # configure environment variables
   gem "dotenv-rails", "~> 2.2"
+  #
+  gem "database_cleaner"
   # testing framework
   gem "rspec-rails", "~> 3.5"
 
@@ -63,7 +68,10 @@ group :development do
 end
 
 group :test do
+  # Rspec assertion matchers
   gem "shoulda-matchers", "~> 3.1"
+  # User interaction testing
+  gem "capybara"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
