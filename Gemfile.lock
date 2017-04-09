@@ -230,6 +230,7 @@ GEM
       ffi (>= 0.5.0)
     responders (2.3.0)
       railties (>= 4.2.0, < 5.1)
+    rolify (5.1.0)
     rspec (3.5.0)
       rspec-core (~> 3.5.0)
       rspec-expectations (~> 3.5.0)
@@ -310,7 +311,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   comfortable_mexican_sofa (~> 1.12.0)
   database_cleaner (~> 1.5)
-  devise
+  devise (~> 4.2)
   dotenv-rails (~> 2.2)
   factory_girl_rails (~> 4.8)
   fuubar (~> 2.2)
@@ -320,8 +321,9 @@ DEPENDENCIES
   listen (~> 3.0.5)
   pg (~> 0.18)
   puma (~> 3.0)
-  pundit
+  pundit (~> 1.1)
   rails (~> 5.0.2)
+  rolify (~> 5.1)
   rspec-rails (~> 3.5)
   sass-rails (~> 5.0)
   shoulda-matchers (~> 3.1)

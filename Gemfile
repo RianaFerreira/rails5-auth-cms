@@ -37,11 +37,11 @@ gem "jbuilder", "~> 2.5"
 gem "comfortable_mexican_sofa", "~> 1.12.0"
 
 # Admin and User authentication
-gem "devise"
+gem "devise", "~> 4.2"
 # role management for users and admins
-# gem "rolify"
+gem "rolify", "~> 5.1"
 # authorization for user and admin feature access
-gem "pundit"
+gem "pundit", "~> 1.1"
 
 group :development, :test do
   # stop code execution and open a debugger console
