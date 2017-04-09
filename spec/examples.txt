@@ -1,9 +1,9 @@
 example_id                             | status | run_time        |
 -------------------------------------- | ------ | --------------- |
-./spec/features/sign_in_spec.rb[1:1:1] | passed | 0.07572 seconds |
-./spec/features/sign_in_spec.rb[1:1:2] | passed | 0.06051 seconds |
-./spec/features/sign_in_spec.rb[1:1:3] | passed | 0.91238 seconds |
-./spec/models/user_spec.rb[1:1]        | passed | 0.00289 seconds |
-./spec/models/user_spec.rb[1:2]        | passed | 0.33029 seconds |
-./spec/models/user_spec.rb[1:3]        | passed | 0.00261 seconds |
-./spec/models/user_spec.rb[1:4]        | passed | 0.01387 seconds |
+./spec/features/sign_in_spec.rb[1:1:1] | passed | 0.06065 seconds |
+./spec/features/sign_in_spec.rb[1:1:2] | passed | 0.43293 seconds |
+./spec/features/sign_in_spec.rb[1:1:3] | passed | 0.05413 seconds |
+./spec/models/user_spec.rb[1:1]        | passed | 0.29607 seconds |
+./spec/models/user_spec.rb[1:2]        | passed | 0.02362 seconds |
+./spec/models/user_spec.rb[1:3]        | passed | 0.00289 seconds |
+./spec/models/user_spec.rb[1:4]        | passed | 0.01705 seconds |

@@ -41,7 +41,7 @@ gem "devise"
 # role management for users and admins
 # gem "rolify"
 # authorization for user and admin feature access
-# gem "pundit"
+gem "pundit"
 
 group :development, :test do
   # stop code execution and open a debugger console
