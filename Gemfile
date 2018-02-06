@@ -7,27 +7,22 @@ end
 
 ruby "2.4.1"
 
-# Bundle edge Rails instead: gem "rails", github: "rails/rails"
-gem "rails", "~> 5.0.2"
-# postgresql as the database for Active Record
-gem "pg", "~> 0.18"
-# app server
-gem "puma", "~> 3.0"
-# SCSS for stylesheets
-gem "sass-rails", "~> 5.0"
-# compressor for JavaScript assets
-gem "uglifier", ">= 1.3.0"
-# .coffee assets and views
-gem "coffee-rails", "~> 4.2"
+gem "rails", "~> 5.1.4"
+gem "pg", "~> 0.21.0"
+gem "puma"
+
+
+## ASSET MANAGEMENT
+gem "coffee-rails"
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem "therubyracer", platforms: :ruby
-
-# Use jquery as the JavaScript library
 gem "jquery-rails"
-# Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
-gem "turbolinks", "~> 5"
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem "jbuilder", "~> 2.5"
+gem "jbuilder"
+gem "sass-rails"
+gem "turbolinks"
+gem "uglifier" # compressor for JavaScript assets
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 3.0"
 # Use ActiveModel has_secure_password
@@ -35,47 +30,53 @@ gem "jbuilder", "~> 2.5"
 
 # Content Management System for app
 gem "comfortable_mexican_sofa", "~> 1.12.0"
+# UPGRADE NOTE
+# Paperclip is now compatible with aws-sdk >= 2.0.0.
+#
+# If you are using S3 storage, aws-sdk >= 2.0.0 requires you to make a few small
+# changes:
+#
+# * You must set the `s3_region`
+# * If you are explicitly setting permissions anywhere, such as in an initializer,
+#   note that the format of the permissions changed from using an underscore to
+#   using a hyphen. For example, `:public_read` needs to be changed to
+#   `public-read`.
+#
+# For a walkthrough of upgrading from 4 to 5 and aws-sdk >= 2.0 you can watch
+# http://rubythursday.com/episodes/ruby-snack-27-upgrade-paperclip-and-aws-sdk-in-prep-for-rails-5
 
+# SECURITY MANAGEMENT
 # Admin and User authentication
-gem "devise", "~> 4.2"
-# role management for users and admins
-gem "rolify", "~> 5.1"
+gem "devise"
 # authorization for user and admin feature access
-gem "pundit", "~> 1.1"
+gem "pundit"
+# role management for users and admins
+gem "rolify"
 
 group :development, :test do
-  # stop code execution and open a debugger console
+  gem "dotenv-rails"
   gem "byebug", platform: :mri
-  # configure environment variables
-  gem "dotenv-rails", "~> 2.2"
-  # support tests for JavaScript features
-  gem "database_cleaner", "~> 1.5"
-  # testing framework
-  gem "rspec-rails", "~> 3.5"
-  # fixture replacement
-  gem "factory_girl_rails", "~> 4.8"
+  gem "database_cleaner"
+  gem "factory_bot_rails"
+  gem "rspec-rails"
 end
 
 group :development do
-  # Access an IRB console on exception pages or by using <%= console %>
-  # anywhere in the code.
-  gem "web-console", ">= 3.3.0"
-  gem "listen", "~> 3.0.5"
+  gem "fuubar" # show test suite progress
+  gem "guard-rspec" # auto run specs related to channged code when saved
+  gem "listen"
   # Spring speeds up development by keeping app running in the background.
   # Read more: https://github.com/rails/spring
   gem "spring"
-  gem "spring-watcher-listen", "~> 2.0.0"
-  # automatically run specs related to channged code when file is saved
-  gem "guard-rspec", "~> 4.7"
-  # show test suite progress
-  gem "fuubar", "~> 2.2"
+  gem "spring-watcher-listen"
+  # Access an IRB console on exception pages or by using <%= console %>
+  # anywhere in the code.
+  gem "web-console"
 end
 
 group :test do
-  # Rspec assertion matchers
-  gem "shoulda-matchers", "~> 3.1"
-  # user interaction testing
-  gem "capybara", "~> 2.13"
+  gem "capybara"
+  gem "shoulda-matchers"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
