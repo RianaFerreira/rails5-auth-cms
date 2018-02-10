@@ -15,147 +15,40 @@ ActiveRecord::Schema.define(version: 20170409100230) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "comfy_cms_blocks", force: :cascade do |t|
-    t.string   "identifier",     null: false
-    t.text     "content"
-    t.string   "blockable_type"
-    t.integer  "blockable_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.index ["blockable_id", "blockable_type"], name: "index_comfy_cms_blocks_on_blockable_id_and_blockable_type", using: :btree
-    t.index ["identifier"], name: "index_comfy_cms_blocks_on_identifier", using: :btree
+  create_table "roles", id: :serial, force: :cascade do |t|
+    t.string "name"
+    t.string "resource_type"
+    t.integer "resource_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
+    t.index ["name"], name: "index_roles_on_name"
+    t.index ["resource_type", "resource_id"], name: "index_roles_on_resource_type_and_resource_id"
   end
 
-  create_table "comfy_cms_categories", force: :cascade do |t|
-    t.integer "site_id",          null: false
-    t.string  "label",            null: false
-    t.string  "categorized_type", null: false
-    t.index ["site_id", "categorized_type", "label"], name: "index_cms_categories_on_site_id_and_cat_type_and_label", unique: true, using: :btree
-  end
-
-  create_table "comfy_cms_categorizations", force: :cascade do |t|
-    t.integer "category_id",      null: false
-    t.string  "categorized_type", null: false
-    t.integer "categorized_id",   null: false
-    t.index ["category_id", "categorized_type", "categorized_id"], name: "index_cms_categorizations_on_cat_id_and_catd_type_and_catd_id", unique: true, using: :btree
-  end
-
-  create_table "comfy_cms_files", force: :cascade do |t|
-    t.integer  "site_id",                                    null: false
-    t.integer  "block_id"
-    t.string   "label",                                      null: false
-    t.string   "file_file_name",                             null: false
-    t.string   "file_content_type",                          null: false
-    t.integer  "file_file_size",                             null: false
-    t.string   "description",       limit: 2048
-    t.integer  "position",                       default: 0, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.index ["site_id", "block_id"], name: "index_comfy_cms_files_on_site_id_and_block_id", using: :btree
-    t.index ["site_id", "file_file_name"], name: "index_comfy_cms_files_on_site_id_and_file_file_name", using: :btree
-    t.index ["site_id", "label"], name: "index_comfy_cms_files_on_site_id_and_label", using: :btree
-    t.index ["site_id", "position"], name: "index_comfy_cms_files_on_site_id_and_position", using: :btree
-  end
-
-  create_table "comfy_cms_layouts", force: :cascade do |t|
-    t.integer  "site_id",                    null: false
-    t.integer  "parent_id"
-    t.string   "app_layout"
-    t.string   "label",                      null: false
-    t.string   "identifier",                 null: false
-    t.text     "content"
-    t.text     "css"
-    t.text     "js"
-    t.integer  "position",   default: 0,     null: false
-    t.boolean  "is_shared",  default: false, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.index ["parent_id", "position"], name: "index_comfy_cms_layouts_on_parent_id_and_position", using: :btree
-    t.index ["site_id", "identifier"], name: "index_comfy_cms_layouts_on_site_id_and_identifier", unique: true, using: :btree
-  end
-
-  create_table "comfy_cms_pages", force: :cascade do |t|
-    t.integer  "site_id",                        null: false
-    t.integer  "layout_id"
-    t.integer  "parent_id"
-    t.integer  "target_page_id"
-    t.string   "label",                          null: false
-    t.string   "slug"
-    t.string   "full_path",                      null: false
-    t.text     "content_cache"
-    t.integer  "position",       default: 0,     null: false
-    t.integer  "children_count", default: 0,     null: false
-    t.boolean  "is_published",   default: true,  null: false
-    t.boolean  "is_shared",      default: false, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.index ["parent_id", "position"], name: "index_comfy_cms_pages_on_parent_id_and_position", using: :btree
-    t.index ["site_id", "full_path"], name: "index_comfy_cms_pages_on_site_id_and_full_path", using: :btree
-  end
-
-  create_table "comfy_cms_revisions", force: :cascade do |t|
-    t.string   "record_type", null: false
-    t.integer  "record_id",   null: false
-    t.text     "data"
-    t.datetime "created_at"
-    t.index ["record_type", "record_id", "created_at"], name: "index_cms_revisions_on_rtype_and_rid_and_created_at", using: :btree
-  end
-
-  create_table "comfy_cms_sites", force: :cascade do |t|
-    t.string  "label",                       null: false
-    t.string  "identifier",                  null: false
-    t.string  "hostname",                    null: false
-    t.string  "path"
-    t.string  "locale",      default: "en",  null: false
-    t.boolean "is_mirrored", default: false, null: false
-    t.index ["hostname"], name: "index_comfy_cms_sites_on_hostname", using: :btree
-    t.index ["is_mirrored"], name: "index_comfy_cms_sites_on_is_mirrored", using: :btree
-  end
-
-  create_table "comfy_cms_snippets", force: :cascade do |t|
-    t.integer  "site_id",                    null: false
-    t.string   "label",                      null: false
-    t.string   "identifier",                 null: false
-    t.text     "content"
-    t.integer  "position",   default: 0,     null: false
-    t.boolean  "is_shared",  default: false, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.index ["site_id", "identifier"], name: "index_comfy_cms_snippets_on_site_id_and_identifier", unique: true, using: :btree
-    t.index ["site_id", "position"], name: "index_comfy_cms_snippets_on_site_id_and_position", using: :btree
-  end
-
-  create_table "roles", force: :cascade do |t|
-    t.string   "name"
-    t.string   "resource_type"
-    t.integer  "resource_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
-    t.index ["name"], name: "index_roles_on_name", using: :btree
-  end
-
-  create_table "users", force: :cascade do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
+  create_table "users", id: :serial, force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer "sign_in_count", default: 0, null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.inet     "current_sign_in_ip"
-    t.inet     "last_sign_in_ip"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+    t.inet "current_sign_in_ip"
+    t.inet "last_sign_in_ip"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   create_table "users_roles", id: false, force: :cascade do |t|
     t.integer "user_id"
     t.integer "role_id"
-    t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
+    t.index ["role_id"], name: "index_users_roles_on_role_id"
+    t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id"
+    t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
 end
